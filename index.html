@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>EcoChallenge - Mi Proyecto</title>
+    <style>
+        /* Estilos rapidos para la pagina */
+        body {
+            font-family: sans-serif;
+            background: #f0f7f4;
+            color: #333;
+            text-align: center;
+            padding-top: 40px;
+        }
+        .caja-principal {
+            max-width: 550px;
+            margin: 0 auto;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+        }
+        .marcador {
+            background: #e8f5e9;
+            padding: 12px;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        .zona-reto {
+            border: 2px dashed #27ae60;
+            padding: 15px;
+            margin: 20px 0;
+            background: #fffde7;
+        }
+        /* Botones del formulario */
+        .btn {
+            padding: 10px 20px;
+            font-size: 15px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            margin: 5px;
+        }
+        .btn-verde { background: #2ec4b6; color: white; }
+        .btn-gris { background: #707070; color: white; }
+    </style>
+</head>
+<body>
+
+    <div class="caja-principal">
+        <h1>🌍 EcoChallenge</h1>
+        <p>Pequeñas acciones cotidianas para cuidar el planeta.</p>
+
+        <div class="marcador">
+            <span>Puntos: {{ juego.pts }}</span> | 
+            <span>Nivel: {{ juego.lvl }}</span>
+        </div>
+
+        <div class="zona-reto">
+            <h3>Reto del dia:</h3>
+            <p>{{ juego.reto }}</p>
+        </div>
+
+        {% if juego.listo == False %}
+            <form action="/completar" method="post" style="display: inline;">
+                <button type="submit" class="btn btn-verde">¡Ya lo hice! (+10 pts)</button>
+            </form>
+        {% else %}
+            <p style="color: #27ae60; font-weight: bold;">🎉 ¡Completado con exito!</p>
+        {% endif %}
+
+        <form action="/nuevo_reto" method="post" style="display: inline;">
+            <button type="submit" class="btn btn-gris">Cambiar de reto</button>
+        </form>
+    </div>
+
+</body>
+</html>
